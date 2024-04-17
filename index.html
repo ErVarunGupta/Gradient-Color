@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient</title>
+    <style>
+        body{
+            display: grid;
+            justify-content: center;
+            height: 100vh;
+            background-image: linear-gradient(
+                to right top,
+                #051937,
+                #004d7a,
+                #008793,
+                #00bf72,
+                #a8eb12
+            );
+        }
+
+        section{
+            padding-top: 200px;
+        }
+
+        .btn{
+            border-radius: 20px;
+            color: white;
+            height: 30px;
+            width: 100px;
+            margin-left: 15px;
+        }
+
+        #myButton1{
+            background-color: black;
+        }
+        #myButton2{
+            background-color: green;
+        }
+
+        #copied{
+            text-decoration: none;
+            color: black;
+            margin-left: 20px;
+        }
+
+        .copyCode{
+            height: 80px;
+            width: 250px;
+            border-radius: 3px;
+            padding-left: 8px;
+            padding-top: 8px;
+            box-shadow: 0px 0px 10px 10px #c3ef1e;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div>
+            <button id="myButton1" class="btn">#051937 </button>
+            <button id="myButton2" class="btn">#008793</button>
+            
+        </div>
+        <h2><a href="#" id="copied">Copy your code here</a></h2>
+        <div class="copyCode">
+            background-image: linear-gradient(to right, rgb(92, 145, 229) , rgb(152, 63, 198))
+        </div>
+    </section>
+
+    <script>
+        let btn1 = document.getElementById("myButton1");
+        let btn2 = document.getElementById("myButton2");
+        let copyCode = document.querySelector(".copyCode");
+        let copied = document.querySelector("#copied");
+
+        const hexFunction = () =>{
+            let hexValue = "0123456789abcdef"
+            let coloCode = "#";
+            for(let i = 1; i <=6; i++){
+                coloCode = coloCode + hexValue[Math.floor(Math.random()*16)];
+            }
+            return coloCode;
+        }
+
+        let rgb1 = "#004773";
+        let rgb2 = "#54d542";
+
+        const handleButton1 = () =>{
+            rgb1 = hexFunction();
+            btn1.textContent = rgb1;
+            document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2})`;
+            copyCode.innerHTML = `background-image: linear-gradient(to right, ${rgb1} , ${rgb2})`
+        }
+
+        const handleButton2 = () =>{
+            rgb2 = hexFunction();
+            btn2.textContent = rgb2;
+            document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2})`;
+            copyCode.innerHTML = `background-image: linear-gradient(to right, ${rgb1} , ${rgb2})`
+        }
+
+        btn1.addEventListener("click", handleButton1);
+        btn2.addEventListener("click", handleButton2);
+
+        copied.addEventListener("click", () =>{
+            alert("Your text has been copied!")
+            navigator.clipboard.writeText(copyCode.innerText);
+        });
+    </script>
+</body>
+</html>
